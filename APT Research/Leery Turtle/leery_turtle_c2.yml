@@ -1,0 +1,25 @@
+title: Leery Turtle CnC Domain Detection
+id: beb0206c-c152-4c1e-89d4-783c58341f14
+status: experimental
+references:
+    - https://cyberstruggle.org/delta/LeeryTurtleThreatReport_05_20.pdf
+description: Detects Leery Turtle CnC Domain Pattern in DNS Queries
+author: Cyber Struggle DELTA Research Group
+date: 23/04/2020
+tags:
+    - attack.command_and_control
+    - attack.t1071
+logsource:
+    category: dns
+detection:
+    selection_cnc_pattern:
+      query|re: '((goo?gl|ama?zo?n|dri?ve?|cloud|share|upload|update).*){2,}'
+    selection_falsepositives:
+      query|endswith:
+        - '.google.com'
+        - '.microsoft.com'
+        - '.amazon.com'
+    condition: selection_cnc_pattern and not selection_falsepositives
+falsepositives:
+  - Unknown
+level: high
