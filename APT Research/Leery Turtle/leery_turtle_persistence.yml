@@ -1,0 +1,27 @@
+title: Leery Turtle Trojan Persistence Detection
+id: ce8abb48-514f-48ad-af5a-4a1e054bc28a
+status: experimental
+references:
+    - https://cyberstruggle.org/delta/LeeryTurtleThreatReport_05_20.pdf
+description: Detects Leery Turtle Trojan Persistency Activity
+author: Cyber Struggle DELTA Research Group
+date: 23/04/2020
+tags:
+    - attack.persistence
+    - attack.t1060
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_backdoor:
+      EventID: 4656
+      ObjectName: 'C:\Users\\*\AppData\Local\Temp\\*.vbs'
+    selection_startup:
+      EventID: 4656
+      ObjectName:
+        - 'C:\Users\\*\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\xBoxOne.lnk'
+        - 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\xBoxOne.lnk'
+    condition: selection_backdoor and selection_startup
+falsepositives:
+  - Unknown
+level: high
