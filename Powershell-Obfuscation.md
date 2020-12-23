@@ -8,6 +8,7 @@ Powershell Obfuscation Cheat sheet for AV/EDRs Evasion
   * [Replace](#Replace)
   * [Reverse-String](#Reverse-String)
   * [RightToLeft](#RightToLeft)
+  * [HTMLEncode](#HTMLEncode)
   * [Base64](#Base64)
   * [XOR](#XOR)  
   * [ROT13](#ROT13)
@@ -51,6 +52,15 @@ write-host teststring
 
 # Example
 write-host (-Join[RegEx]::Matches("gnirtstset",'.','RightToLeft'))
+```
+
+#### HTMLEncode
+```powershell
+# Original 
+write-host "test  string"
+
+# Example
+write-host ([System.Web.HttpUtility]::HtmlDecode("test&nbsp;&nbsp;string"))
 ```
 
 #### Base64
